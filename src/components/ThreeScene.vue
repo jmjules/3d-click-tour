@@ -50,9 +50,18 @@ const jsonData = {
 }
 
 const testArray = [
-  "green",
-  "blue",
-  "red",
+  {
+   text: "Hier ist Text für Kamera 1.",
+   bgColor: "green",
+  },
+  {
+   text: "Hier ist Text für Kamera 2.",
+   bgColor: "blue",
+  },
+  {
+   text: "Hier ist Text für Kamera 3.",
+   bgColor: "red",
+  },
 ]
 
 
@@ -61,8 +70,10 @@ function switchToCamera(index: number) {
   if (!target) return;
   const testBox = document.querySelector("#testbox") as HTMLElement | null;
   if (testBox) {
-    const bgColor = testArray[index] ? testArray[index] : "white"; // fallback color white
-    testBox.style.backgroundColor = bgColor
+    const bgColor = testArray[index]?.bgColor ? testArray[index].bgColor : "white"; // fallback color white
+    const innerText = testArray[index]?.text ? testArray[index].text : "fallback text";
+    testBox.style.backgroundColor = bgColor;
+    testBox.innerText = innerText;
   }
   transitionToCamera(camera, target, renderer, scene);
 }
