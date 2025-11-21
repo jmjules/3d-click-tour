@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Step 1",
+        "text": "Hier ist Text für Kamera 1.",
+        "bgColor": "green",
+        "cameraIndex": 0
+    },
+    {
+        "title": "Step 2",
+        "text": "Hier ist Text für Kamera 2.",
+        "bgColor": "blue",
+        "cameraIndex": 1
+    },
+    {
+        "title": "Step 3",
+        "text": "Hier ist Text für Kamera 3.",
+        "bgColor": "red",
+        "cameraIndex": 2
+    },
+    {
+        "title": "Step 4",
+        "text": "Hier ist Text für Step 4 aber wieder Kamera 1.",
+        "bgColor": "orange",
+        "cameraIndex": 1
+    }
+]

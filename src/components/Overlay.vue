@@ -1,14 +1,15 @@
 <template>
   <div class="overlay">
-    <div class="title">Title text</div>
-    <div class="body-text">Here is some body text</div>
+    <!-- Display reactive step data -->
+    <div class="title">{{ currentStep?.title ?? 'Title text' }}</div>
+    <div class="body-text">{{ currentStep?.text ?? 'Here is some body text' }}</div>
+
     <div>
       <button @click="emit('previous')">Back</button>
       <button @click="emit('next')">Next</button>
     </div>
-    <br>
-    <br>
-    <br>
+
+    <br><br><br>
     <hr>
     <div>
       <button @click="onCamera(0)">Camera 1</button>
@@ -19,6 +20,17 @@
 </template>
 
 <script lang="ts" setup>
+import { defineProps, defineEmits } from "vue";
+
+// Receive the current step object from parent
+const props = defineProps<{
+  currentStep?: {
+    title?: string;
+    text?: string;
+    bgColor?: string;
+  };
+}>();
+
 const emit = defineEmits(["switch-camera", "previous", "next"]);
 
 function onCamera(i: number) {
@@ -36,7 +48,6 @@ function onCamera(i: number) {
   gap: 10px;
   z-index: 100;
   padding: 1rem;
-
   background-color: blanchedalmond;
 }
 
