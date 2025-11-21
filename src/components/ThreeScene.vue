@@ -121,8 +121,9 @@ function switchToCamera(index: number) {
   if (!target) return;
   const testBox = document.querySelector("#testbox") as HTMLElement | null;
   if (testBox) {
-    const bgColor = steps[index]?.bgColor ? steps[index].bgColor : "white"; // fallback color white
-    const innerText = steps[index]?.text ? steps[index].text : "fallback text";
+    const i =  currentStepIndex.value;
+    const bgColor = steps[i]?.bgColor ? steps[i].bgColor : "white"; // fallback color white
+    const innerText = steps[i]?.text ? steps[i].text : "fallback text";
     testBox.style.backgroundColor = bgColor;
     testBox.innerText = innerText;
   }
