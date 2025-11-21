@@ -115,6 +115,7 @@ function handleOverlayEvent(action: "next" | "previous") {
 }
 
 
+const isTransitioning = ref(false);
 
 function switchToCamera(index: number) {
   const target = gltfCameras[index];
@@ -127,7 +128,11 @@ function switchToCamera(index: number) {
     testBox.style.backgroundColor = bgColor;
     testBox.innerText = innerText;
   }
-  transitionToCamera(camera, target, renderer, scene);
+  isTransitioning.value = true;
+
+  transitionToCamera(camera, target, renderer, scene, 1.2, () => {
+    isTransitioning.value = false; // unlock buttons when done
+  });
 }
 </script>
 

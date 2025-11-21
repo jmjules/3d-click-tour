@@ -24,10 +24,10 @@ export function transitionToCamera(
   target: THREE.Object3D,
   renderer: THREE.WebGLRenderer,
   scene: THREE.Scene,
-  duration = 1.2
+  duration = 1.2,
+  onComplete?: () => void
 ) {
-  if (!camera || isTransitioning) return;
-  isTransitioning = true;
+  if (!camera) return;
 
   _startPos.copy(camera.position);
   _startQuat.copy(camera.quaternion);
@@ -47,18 +47,20 @@ export function transitionToCamera(
     camera.position.lerpVectors(_startPos, _endPos, e);
     camera.quaternion.slerpQuaternions(_startQuat, _endQuat, e);
 
-    renderer.render(scene, camera); // pass the real scene
+    renderer.render(scene, camera);
 
     if (t < 1) {
       requestAnimationFrame(step);
-      return;
-    }
+    } else {
+      // finalize
+      camera.position.copy(_endPos);
+      camera.quaternion.copy(_endQuat);
 
-    camera.position.copy(_endPos);
-    camera.quaternion.copy(_endQuat);
-    isTransitioning = false;
+      if (onComplete) onComplete(); // unlock buttons in parent
+    }
   }
 
   requestAnimationFrame(step);
 }
+
 
